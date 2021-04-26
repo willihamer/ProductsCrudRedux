@@ -17,7 +17,7 @@ h1 a.text-light:hover {
     text-decoration: none!important;
 }
 
-.nuevo-post {
+.new-post {
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -41,16 +41,16 @@ h1 a.text-light:hover {
     }
 }
 
-.acciones {
+.actions {
     margin: 1rem 0;
 }
 
 @media (min-width:768px) {
-    .acciones {
+    .actions {
         margin: 0;
     }
 }
 
-.acciones>* {
+.actions>* {
     flex: 1;
 }
