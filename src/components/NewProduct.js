@@ -2,13 +2,17 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { createNewProductAction } from '../actions/productsActions'
 
-export default function NewProduct() {
+export default function NewProduct({ history }) {
 
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
 
     // use the dispatch to create a function
     const dispatch = useDispatch();
+
+    const loading = useSelector(state => state.products.loading);
+    const error = useSelector(state => state.products.error)
+
 
     // calling the action of ProductsAction
     const addProduct = (product) => dispatch(createNewProductAction(product));
@@ -28,6 +32,8 @@ export default function NewProduct() {
             name,
             price
         });
+
+        history.push('/');
     }
     return (
         <div className="row justify-content-center">
@@ -51,6 +57,9 @@ export default function NewProduct() {
                             </div>
                             <button type="submit" className="btn btn-primary font-weight-bold text-uppercase d-block w-100">Add product</button>
                         </form>
+
+                        {loading ? <p>...loading</p> : null}
+                        {error ? <p className="alert alert-danger p2 mt-4 text-center">An error occurs</p> : null}
                     </div>
                 </div>
             </div>
