@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { showAlertAction, hideAlertAction } from '../actions/alertsActions';
 import { createNewProductAction } from '../actions/productsActions'
 
 export default function NewProduct({ history }) {
@@ -11,8 +12,8 @@ export default function NewProduct({ history }) {
     const dispatch = useDispatch();
 
     const loading = useSelector(state => state.products.loading);
-    const error = useSelector(state => state.products.error)
-
+    const error = useSelector(state => state.products.error);
+    const alert = useSelector(state => state.alerts.alert);
 
     // calling the action of ProductsAction
     const addProduct = (product) => dispatch(createNewProductAction(product));
@@ -22,10 +23,15 @@ export default function NewProduct({ history }) {
 
         // check form
         if (name.trim() === '' || price <= 0) {
+            const answerAlert = {
+                message: 'Both fields are required',
+                classes: 'alert alert-danger text-center text-uppercase p3'
+            }
+            dispatch(showAlertAction(answerAlert));
             return;
         }
 
-        // check for errors
+        dispatch(hideAlertAction());
 
         // add Product
         addProduct({
@@ -43,7 +49,7 @@ export default function NewProduct({ history }) {
                         <h2 className="text-center mb-4 font-weight-bold">
                             Add new Product
                         </h2>
-
+                        {alert ? <p className={alert.classes}>{alert.message}</p> : null}
                         <form
                             onSubmit={submitNewProduct}
                         >
