@@ -1,4 +1,4 @@
-# Personal budget
+# Products CRUD Redux
 
 This is a Products CRUD application, created with  React JS, Redux, internal rest API (Json Server), Axios, react router, and also some fun stuff with sweet alert.
 
